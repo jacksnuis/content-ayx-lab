@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>爱游戏体育 · 赛事查询与延伸阅读</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      background: #f4f9fc;
+      color: #1e2b30;
+      line-height: 1.6;
+      padding: 0 1.25rem;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 2rem 0 3rem;
+    }
+
+    /* ---------- hero ---------- */
+    .hero {
+      background: linear-gradient(135deg, #d9f0f5 0%, #b6dee9 100%);
+      border-radius: 2rem;
+      padding: 3rem 2.5rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 8px 24px rgba(0, 110, 115, 0.08);
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: #004f57;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      max-width: 640px;
+      margin: 0 auto 1.5rem;
+      color: #1f5059;
+    }
+
+    .hero-tagline {
+      display: inline-block;
+      background: rgba(0, 120, 125, 0.08);
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.95rem;
+      color: #006b74;
+      border: 1px solid rgba(0, 140, 145, 0.2);
+    }
+
+    /* ---------- 网格卡片 ---------- */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.8rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.75rem 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 50, 55, 0.04);
+      transition: transform 0.15s ease, box-shadow 0.2s ease;
+      border: 1px solid #e2f0f3;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(0, 100, 105, 0.08);
+      border-color: #b5dbe3;
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #005f68;
+      margin-bottom: 0.65rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 3px solid #b7e0e8;
+      display: inline-block;
+    }
+
+    .card p, .card li {
+      font-size: 0.96rem;
+      color: #2b4147;
+    }
+
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .card li {
+      padding: 0.25rem 0 0.25rem 1.25rem;
+      position: relative;
+    }
+
+    .card li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: #00939e;
+      font-weight: bold;
+    }
+
+    /* ---------- 说明区 ---------- */
+    .section-desc {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 2rem 2.2rem;
+      margin-bottom: 2.5rem;
+      border: 1px solid #d7e9ee;
+    }
+
+    .section-desc h2 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #00525a;
+      margin-bottom: 1.2rem;
+    }
+
+    .section-desc p {
+      margin-bottom: 1rem;
+    }
+
+    .section-desc .highlight {
+      background: #dff2f6;
+      padding: 0.8rem 1.2rem;
+      border-radius: 1rem;
+      border-left: 5px solid #0097a3;
+      margin: 1.2rem 0;
+    }
+
+    /* ---------- FAQ 摘要 ---------- */
+    .faq-summary {
+      background: #eaf5f9;
+      border-radius: 1.5rem;
+      padding: 2rem 2.2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .faq-summary h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #004f57;
+      margin-bottom: 1.2rem;
+    }
+
+    .faq-item {
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #cce2e9;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-item strong {
+      display: block;
+      font-weight: 600;
+      color: #00626b;
+      margin-bottom: 0.2rem;
+    }
+
+    .faq-item span {
+      color: #1d434b;
+      font-size: 0.95rem;
+    }
+
+    /* ---------- 底部链接 ---------- */
+    .footer-links {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.8rem 2rem;
+      text-align: center;
+      border: 1px solid #d7e9ee;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links p {
+      color: #2c4f57;
+      font-size: 0.98rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links .link-block {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-top: 0.8rem;
+    }
+
+    .footer-links a {
+      color: #007a85;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.2rem 0.4rem;
+      border-radius: 6px;
+      transition: background 0.1s;
+    }
+
+    .footer-links a:hover {
+      background: #ddf0f5;
+      color: #004f57;
+    }
+
+    .site-meta {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #6b8f98;
+      padding-top: 1rem;
+    }
+
+    /* ---------- 响应式 ---------- */
+    @media (max-width: 640px) {
+      .hero {
+        padding: 2.2rem 1.2rem;
+      }
+
+      .hero h1 {
+        font-size: 1.9rem;
+      }
+
+      .section-desc, .faq-summary, .footer-links {
+        padding: 1.5rem 1.2rem;
+      }
+
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- hero -->
+  <div class="hero">
+    <h1>爱游戏体育 · 信息速览</h1>
+    <p>赛事对照、日常查询与延伸资料整理 — 一份围绕体育资讯的简明指引页面。</p>
+    <div class="hero-tagline">⚡ 查询 · 对照 · 延伸</div>
+  </div>
+
+  <!-- 优势区 / 使用场景 -->
+  <div class="grid-3">
+    <div class="card">
+      <h3>日常查询</h3>
+      <ul>
+        <li>快速对照赛事基本信息与动态</li>
+        <li>浏览体育项目分类与规则简述</li>
+        <li>查阅历史纪录与统计数据</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>对照阅读</h3>
+      <ul>
+        <li>不同赛制、联赛结构对比</li>
+        <li>选手/队伍数据横向参考</li>
+        <li>赛事时间线与术语整理</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>延伸内容</h3>
+      <ul>
+        <li>体育文化、发展背景介绍</li>
+        <li>观赛入门与知识拓展</li>
+        <li>相关工具与资源索引</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 说明区：从日常查询、对照和延伸阅读的角度展开 -->
+  <div class="section-desc">
+    <h2>关于这份资料页</h2>
+    <p>本页面并非官方公告或实时数据源，而是围绕体育信息查阅整理的一份结构式引导。许多用户需要快速核实某个联赛的赛制、对比不同项目的记分规则，或是了解某项运动的背景常识。这里尝试从“查询、对照、延伸”三个角度提供条目式的整理，方便随手翻看。</p>
+    <div class="highlight">
+      <strong>使用建议：</strong> 如果你正在查找某类体育项目的基础信息，可以先利用上方卡片分类缩小范围；若需要更详细的赛程或官方数据，可前往对应体育机构网站进一步查阅。
+    </div>
+    <p>举例来说，当你需要厘清“循环赛与淘汰赛的轮次差异” 或 “不同运动中对‘平局’的处理方式” 时，本页的对照卡片能提供一个快速起点。所有内容均基于公开资料归纳，不涉及内部数据或未核实信息。</p>
+  </div>
+
+  <!-- FAQ 摘要 -->
+  <div class="faq-summary">
+    <h2>常见问题摘要</h2>
+    <div class="faq-item">
+      <strong>❓ 这里的资料来自哪里？</strong>
+      <span>内容由爱好者整理自公开体育规则手册、赛事百科及官方发布信息，仅供参考。</span>
+    </div>
+    <div class="faq-item">
+      <strong>❓ 可以转载或分享吗？</strong>
+      <span>本页为信息汇编，不限制合理引用与分享，但建议同时核对来源文档以保证准确性。</span>
+    </div>
+    <div class="faq-item">
+      <strong>❓ 如何找到更完整的赛事数据？</strong>
+      <span>可关注各大体育联合会官网、数据统计平台及权威媒体；本页面仅做概要索引。</span>
+    </div>
+  </div>
+
+  <!-- 底部链接 -->
+  <div class="footer-links">
+    <p>更多体育资讯与深度内容，请浏览 <a href="https://site-igamesports.com">爱游戏体育</a>  —  一个专注体育信息整理与延伸阅读的平台。</p>
+    <div class="link-block">
+      <a href="https://site-igamesports.com">爱游戏体育</a>
+      <span style="color:#9bbbc3;">·</span>
+      <a href="https://site-igamesports.com">爱游戏体育</a>
+      <span style="color:#9bbbc3;">·</span>
+      <a href="https://site-igamesports.com">爱游戏体育</a>
+      <span style="color:#9bbbc3;">·</span>
+      <a href="https://site-igamesports.com">爱游戏体育</a>
+    </div>
+  </div>
+
+  <div class="site-meta">
+    本页为静态信息展示 · 内容定期梳理 · 仅供参考
+  </div>
+</div>
+</body>
+</html>
